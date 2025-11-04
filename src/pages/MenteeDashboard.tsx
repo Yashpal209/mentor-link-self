@@ -24,7 +24,7 @@ const MenteeDashboard = () => {
       .from("bookings")
       .select(`
         *,
-        profiles!bookings_mentor_id_fkey(full_name)
+        mentor:profiles!mentor_id(full_name)
       `)
       .eq("mentee_id", user.id)
       .order("session_date", { ascending: true });
@@ -124,7 +124,7 @@ const MenteeDashboard = () => {
                   >
                     <div>
                       <p className="font-semibold">
-                        Mentor: {booking.profiles?.full_name || "Unknown"}
+                        Mentor: {booking.mentor?.full_name || "Unknown"}
                       </p>
                       <p className="text-sm text-muted-foreground">
                         {new Date(booking.session_date).toLocaleDateString()} at{" "}
@@ -139,7 +139,12 @@ const MenteeDashboard = () => {
                       </span>
                     </div>
                     {booking.status === "confirmed" && (
-                      <Button variant="outline">Join Session</Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => navigate(`/video-session/${booking.id}`)}
+                      >
+                        Join Session
+                      </Button>
                     )}
                   </div>
                 ))}

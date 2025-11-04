@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { UserCircle, Users, Calendar, Video, Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import TestDataSeeder from "@/components/TestDataSeeder";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -73,6 +74,13 @@ const Landing = () => {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Test Data Seeder - Remove in production */}
+      <section className="py-10 px-4 bg-yellow-50 border-t">
+        <div className="container mx-auto max-w-md">
+          <TestDataSeeder />
         </div>
       </section>
 

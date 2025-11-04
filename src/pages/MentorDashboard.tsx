@@ -24,7 +24,7 @@ const MentorDashboard = () => {
       .from("bookings")
       .select(`
         *,
-        profiles!bookings_mentee_id_fkey(full_name)
+        mentee:profiles!mentee_id(full_name)
       `)
       .eq("mentor_id", user.id)
       .order("session_date", { ascending: true });
@@ -130,7 +130,7 @@ const MentorDashboard = () => {
                   >
                     <div>
                       <p className="font-semibold">
-                        {booking.profiles?.full_name || "Unknown"}
+                        {booking.mentee?.full_name || "Unknown"}
                       </p>
                       <p className="text-sm text-muted-foreground">
                         {new Date(booking.session_date).toLocaleDateString()} at{" "}

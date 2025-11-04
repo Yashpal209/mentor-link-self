@@ -39,6 +39,11 @@ const BrowseMentors = () => {
       `)
       .in("user_id", mentorIds);
 
+    // Also fetch mentor skills separately if the join doesn't work
+    if (profilesError) {
+      console.error("Error fetching profiles:", profilesError);
+    }
+
     if (profilesError) {
       toast.error("Failed to load mentor profiles");
     } else {

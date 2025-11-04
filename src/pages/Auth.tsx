@@ -38,24 +38,24 @@ const Auth = () => {
             emailRedirectTo: `${window.location.origin}/`,
           },
         });
-        
+
         if (signUpError) throw signUpError;
-        
+
         if (authData.user) {
           // Create profile
           const { error: profileError } = await supabase
             .from("profiles")
             .insert([{ user_id: authData.user.id, full_name: fullName }]);
-          
+
           if (profileError) throw profileError;
-          
+
           // Create role
           const { error: roleError } = await supabase
             .from("user_roles")
             .insert([{ user_id: authData.user.id, role }]);
-          
+
           if (roleError) throw roleError;
-          
+
           toast.success("Account created successfully!");
           navigate("/profile-setup");
         }

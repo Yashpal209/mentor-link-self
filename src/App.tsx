@@ -11,6 +11,10 @@ import ProfileSetup from "./pages/ProfileSetup";
 import MentorDashboard from "./pages/MentorDashboard";
 import MenteeDashboard from "./pages/MenteeDashboard";
 import BrowseMentors from "./pages/BrowseMentors";
+import BookSession from "./pages/BookSession";
+import VideoSession from "./pages/VideoSession";
+import Availability from "./pages/Availability";
+import Profile from "./pages/Profile";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -31,6 +35,10 @@ const App = () => (
             <Route path="/mentor-dashboard" element={<ProtectedRoute><MentorDashboard /></ProtectedRoute>} />
             <Route path="/mentee-dashboard" element={<ProtectedRoute><MenteeDashboard /></ProtectedRoute>} />
             <Route path="/browse-mentors" element={<ProtectedRoute><BrowseMentors /></ProtectedRoute>} />
+            <Route path="/book-session/:mentorId" element={<ProtectedRoute><BookSession /></ProtectedRoute>} />
+            <Route path="/video-session/:bookingId" element={<ProtectedRoute><VideoSession /></ProtectedRoute>} />
+            <Route path="/availability" element={<ProtectedRoute><Availability /></ProtectedRoute>} />
+            <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
