@@ -1,14 +1,38 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { useUserRole } from "@/hooks/useUserRole";
+import Landing from "./Landing";
 
 const Index = () => {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+  const { user, loading: authLoading } = useAuth();
+  const { role, loading: roleLoading } = useUserRole();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!authLoading && !roleLoading) {
+      if (user && role) {
+        if (role === "mentor") {
+          navigate("/mentor-dashboard");
+        } else if (role === "mentee") {
+          navigate("/mentee-dashboard");
+        }
+      }
+    }
+  }, [user, role, authLoading, roleLoading, navigate]);
+
+  if (authLoading || roleLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return <Landing />;
 };
 
 export default Index;
